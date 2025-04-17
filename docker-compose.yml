@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  postgres-site-creation:
+    image: "postgres:latest"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: site-creation
+    ports:
+      - "5432:5432"
