@@ -62,11 +62,12 @@ public class CryptoCurrencyService {
         return cryptoCurrency;
     }
 
-    public CryptoCurrency create(CryptoCurrencyCreateRequest updateRequest) {
+    public CryptoCurrency create(CryptoCurrencyCreateRequest createRequest, byte[] imageBytes) {
         CryptoCurrency cryptoCurrency = new CryptoCurrency(
-                updateRequest.getName(),
-                updateRequest.getSymbol(),
-                updateRequest.getPrice()
+                createRequest.getName(),
+                createRequest.getSymbol(),
+                createRequest.getPrice(),
+                imageBytes
         );
 
         return repository.save(cryptoCurrency);

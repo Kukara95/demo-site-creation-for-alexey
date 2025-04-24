@@ -1,0 +1,1 @@
+alter table crypto_currency add column if not exists image bytea;

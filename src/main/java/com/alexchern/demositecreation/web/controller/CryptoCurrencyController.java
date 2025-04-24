@@ -5,8 +5,11 @@ import com.alexchern.demositecreation.domain.service.CryptoCurrencyService;
 import com.alexchern.demositecreation.web.dto.CryptoCurrencyCreateRequest;
 import com.alexchern.demositecreation.web.dto.CryptoCurrencyUpdateRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
@@ -32,9 +35,13 @@ public class CryptoCurrencyController {
         return service.getBySymbol(symbol);
     }
 
-    @PostMapping
-    private CryptoCurrency save(@RequestBody CryptoCurrencyCreateRequest createRequest) {
-        return service.create(createRequest);
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    private CryptoCurrency save(
+            @RequestPart("createRequest") CryptoCurrencyCreateRequest createRequest,
+            @RequestPart(value = "image", required = false) MultipartFile imageFile
+    ) throws IOException {
+        byte[] imageBytes = imageFile.getBytes();
+        return service.create(createRequest, imageBytes);
     }
 
     @PatchMapping("/update/{id}")

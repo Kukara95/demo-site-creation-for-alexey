@@ -10,10 +10,11 @@ import org.springframework.data.relational.core.mapping.Table;
 @Table(name = "crypto_currency")
 public class CryptoCurrency {
 
-    public CryptoCurrency(String name, String symbol, double price) {
+    public CryptoCurrency(String name, String symbol, double price, byte[] imageBytes) {
         this.name = name;
         this.symbol = symbol;
         this.price = price;
+        this.image = imageBytes;
     }
 
     @Id
@@ -21,4 +22,5 @@ public class CryptoCurrency {
     private String name;
     private String symbol;
     private double price;
+    private byte[] image;
 }
